@@ -1,0 +1,2 @@
+rootProject.name='proyecto-2-frontend-citas-android'
+include ':app'
