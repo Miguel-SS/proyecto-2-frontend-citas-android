@@ -1,11 +1,12 @@
-package cr.una.frontend;
+package cr.una.frontend.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
+import cr.una.frontend.R;
 import cr.una.frontend.model.Patient;
 import cr.una.frontend.service.ServiceFacade;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +14,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 
-    private static final Logger logger = LogManager.getLogger(MainActivity.class);
+    private static final Logger logger = LogManager.getLogger(LoginActivity.class);
 
     private ServiceFacade service;
 
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         try {
             init();
         } catch (IOException e) {
@@ -61,9 +62,13 @@ public class MainActivity extends Activity {
                     view.dispose();
                     new AdminView((Admin) auxUser, service);
                      */
-                } else { /*view.showError("Contrasena o usuario incorrecto");*/ }
+                } else {
+                    Toast.makeText(getBaseContext(),"Contrasena o usuario incorrecto", Toast.LENGTH_SHORT).show();
+                }
             }
-        } else { /*view.showError("Usuario no encontrado");*/ }
+        } else {
+            Toast.makeText(getBaseContext(),"Usuario no encontrado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean verifyPass(int id, String password, Patient patient) {
@@ -74,5 +79,4 @@ public class MainActivity extends Activity {
         }
         return false;
     }
-
 }
